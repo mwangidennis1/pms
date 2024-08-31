@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: html(~{::title}, ~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Parcel</title>
+    <style>
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-section {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .form-section h2 {
+            margin-top: 0;
+            font-size: 1.2em;
+            color: #333;
+            border-bottom: 2px solid #ffd700;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        button[type="submit"] {
+            background-color: #ffd700;
+            color: #333;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button[type="submit"]:hover {
+            background-color: #e6c200;
+        }
+    </style>
+</head>
+<body>
+<section th:fragment="content">
+    <div class="form-container">
+        <h2>Create Parcel</h2>
+        <form th:action="@{/parcels}" th:object="${parcel}" method="post">
+            <div class="form-group">
+                <label for="destination">Destination:</label>
+                <input type="text" id="destination" th:field="*{destination}" required>
+            </div>
+            <div class="form-group">
+                <label for="estimatedDeliveryDate">Estimated delivery time:</label>
+                <input type="datetime-local" id="estimatedDeliveryDate" th:field="*{estimatedDeliveryDate}">
+            </div>
+            <div class="form-group">
+                <label for="approxWeight">Approximate Weight:</label>
+                <input type="text" id="approxWeight" th:field="*{approxWeight}" required>
+            </div>
+            <div class="form-group">
+                <label for="categories">Category:</label>
+                <select id="categories" th:field="*{categories}">
+                    <option value="STANDARD">STANDARD</option>
+                    <option value="PERISHABLE">PERISHABLE</option>
+                    <option value="FRAGILE">FRAGILE</option>
+                    <option value="HARZARDOUS">HARZARDOUS</option>
+                </select>
+            </div>
+            <div class="form-section">
+                <h2>Receiver Details</h2>
+                <div class="form-group">
+                    <label for="receiverPhoneNo">Phone Number:</label>
+                    <input type="text" id="receiverPhoneNo" th:field="*{receiver.receiverPhoneNo}">
+                </div>
+                <div class="form-group">
+                    <label for="receiverEmail">Email:</label>
+                    <input type="email" id="receiverEmail" th:field="*{receiver.receiverEmail}">
+                </div>
+            </div>
+            <div class="form-section">
+                <h2>Sender Details</h2>
+                <div class="form-group">
+                    <label for="senderName">Name:</label>
+                    <input type="text" id="senderName" th:field="*{sender.senderName}" required>
+                </div>
+                <div class="form-group">
+                    <label for="senderPhoneNo">Phone Number:</label>
+                    <input type="text" id="senderPhoneNo" th:field="*{sender.senderPhoneNo}">
+                </div>
+                <div class="form-group">
+                    <label for="senderEmail">Email:</label>
+                    <input type="email" id="senderEmail" th:field="*{sender.senderEmail}" required>
+                </div>
+            </div>
+            <button type="submit">Create Parcel</button>
+        </form>
+    </div>
+    <script>
+        // Get the input element
+        var dateInput = document.getElementById('estimatedDeliveryDate');
+
+        // Get the current date and time
+        var now = new Date();
+
+        // Format the date and time as YYYY-MM-DDTHH:MM
+        var year = now.getFullYear();
+        var month = String(now.getMonth() + 1).padStart(2, '0');
+        var day = String(now.getDate()).padStart(2, '0');
+        var hours = String(now.getHours()).padStart(2, '0');
+        var minutes = String(now.getMinutes()).padStart(2, '0');
+
+        var formattedDate = `${year}-${month}-${day}T${hours}:${minutes}`;
+
+        // Set the min attribute to the formatted date
+        dateInput.min = formattedDate;
+    </script>
+</section>
+
+</body>
+</html>

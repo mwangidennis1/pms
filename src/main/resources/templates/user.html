@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base :: html(~{::title}, ~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Details</title>
+</head>
+<body>
+<section th:fragment="content">
+    <h2>Employee Information</h2>
+    <div class="employee-info">
+        <p><strong>Username:</strong> <span th:text="${employee.username}"></span></p>
+        <p><strong>Email:</strong> <span th:text="${employee.email}"></span></p>
+        <p><strong>Role:</strong> <span th:text="${employee.role}"></span></p>
+    </div>
+    <button type="button" ><a th:href="@{'/editEmployee/' + ${employee.id}}" class="edit-button">Edit Employee</a></button>
+
+   <!-- <div class="additional-info">
+        <h3>Additional Information</h3>
+        <p>Next stuff goes here...</p>
+    </div>-->
+</section>
+</body>
+</html>

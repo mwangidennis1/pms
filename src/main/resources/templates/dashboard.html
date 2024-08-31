@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base :: html(~{::title}, ~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Parcel Dashboard</title>
+</head>
+<body>
+<section th:fragment="content">
+    <form th:action="@{/search}" method="post" class="form-track">
+        <label for="trackingNumber">Enter tracking number</label>
+        <input type="text" id="trackingNumber" name="trackingNumber" required class="input-field"/>
+        <button type="submit" class="btn-submit">search</button>
+    </form>
+    <div style="display: flex; justify-content: space-around; align-items: stretch; padding: 20px; background-color: #f5f5f5;">
+        <div id="in-transit" style="flex: 1; max-width: 300px; margin: 0 10px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); overflow: hidden;">
+            <div style="background-color: #2c3e50; color: #ffffff; padding: 15px; font-size: 18px; font-weight: bold; text-align: center;">In Transit</div>
+            <div style="padding: 20px; display: flex; flex-direction: column; align-items: center;">
+                <div style="font-size: 36px; font-weight: bold; color: #2c3e50; margin-bottom: 10px;" th:text="${inTransitCount}">0</div>
+                <a style="display: inline-block; padding: 10px 20px; background-color: #3498db; color: #ffffff; text-decoration: none; border-radius: 4px;" th:href="@{/in_transit}">View Details</a>
+            </div>
+        </div>
+        <div id="delivered" style="flex: 1; max-width: 300px; margin: 0 10px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); overflow: hidden;">
+            <div style="background-color: #2c3e50; color: #ffffff; padding: 15px; font-size: 18px; font-weight: bold; text-align: center;">Delivered</div>
+            <div style="padding: 20px; display: flex; flex-direction: column; align-items: center;">
+                <div style="font-size: 36px; font-weight: bold; color: #2c3e50; margin-bottom: 10px;" th:text="${deliveredCount}">0</div>
+                <a style="display: inline-block; padding: 10px 20px; background-color: #3498db; color: #ffffff; text-decoration: none; border-radius: 4px;" th:href="@{/delivered}">View Details</a>
+            </div>
+        </div>
+        <div id="returned" style="flex: 1; max-width: 300px; margin: 0 10px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); overflow: hidden;">
+            <div style="background-color: #2c3e50; color: #ffffff; padding: 15px; font-size: 18px; font-weight: bold; text-align: center;">Returned</div>
+            <div style="padding: 20px; display: flex; flex-direction: column; align-items: center;">
+                <div style="font-size: 36px; font-weight: bold; color: #2c3e50; margin-bottom: 10px;" th:text="${returnedCount}">0</div>
+                <a style="display: inline-block; padding: 10px 20px; background-color: #3498db; color: #ffffff; text-decoration: none; border-radius: 4px;" th:href="@{/returned}">View Details</a>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

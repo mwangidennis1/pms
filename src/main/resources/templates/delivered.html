@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivered Parcels</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        h1 {
+            background-color: #3498db;
+            color: #ffffff;
+            padding: 20px;
+            margin: 0;
+            font-size: 24px;
+            text-align: center;
+        }
+        .table-responsive {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .action-link {
+            display: inline-block;
+            padding: 6px 12px;
+            background-color: #3498db;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .action-link:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Delivered Parcels</h1>
+    <div class="table-responsive">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Destination</th>
+                <th>Est. Delivery Date</th>
+                <th>Weight</th>
+                <th>Category</th>
+                <th>Status</th>
+                <th>Tracking Number</th>
+                <th>Receiver</th>
+                <th>Sender</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="deliveredParcel : ${deliveredParcels}">
+                <td th:text="${deliveredParcel.id}"></td>
+                <td th:text="${deliveredParcel.destination}"></td>
+                <td th:text="${deliveredParcel.estimatedDeliveryDate}"></td>
+                <td th:text="${deliveredParcel.approxWeight}"></td>
+                <td th:text="${deliveredParcel.categories}"></td>
+                <td th:text="${deliveredParcel.parcelStatus}"></td>
+                <td th:text="${deliveredParcel.trackingNumber}"></td>
+                <td th:text="${deliveredParcel.receiver.receiverEmail}"></td>
+                <td th:text="${deliveredParcel.sender.senderName}"></td>
+                <td><a class="action-link" th:href="@{'/editParcel/' + ${deliveredParcel.id}}">Edit</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

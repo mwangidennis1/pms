@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Track Me</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 20px 0;
+        }
+        .header h1 {
+            font-size: 36px;
+            margin: 0;
+            color: #333;
+        }
+        .header h4 {
+            font-size: 18px;
+            margin: 0;
+            color: #666;
+        }
+        .main-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .form-track {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .form-track label {
+            font-size: 16px;
+            color: #555;
+        }
+        .input-field {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            color: #333;
+        }
+        .btn-submit {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .btn-submit:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <h1>Maya</h1>
+        <h4>Parcel Inc</h4>
+    </header>
+    <main class="main-content">
+        <form th:action="@{/tracking_parcels}" method="post" class="form-track">
+            <label for="trackingNumber">Enter tracking number</label>
+            <input type="text" id="trackingNumber" name="trackingNumber" required class="input-field"/>
+            <button type="submit" class="btn-submit">Track me</button>
+        </form>
+    </main>
+</div>
+</body>
+</html>

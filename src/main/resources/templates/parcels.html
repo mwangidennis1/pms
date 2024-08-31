@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base :: html(~{::title}, ~{::section})}"
+>
+<head>
+    <title>Parcels List</title>
+</head>
+<body>
+<h1>Parcels List</h1>
+<section th:fragment="content">
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Destination</th>
+        <th>Estimated Delivery Date</th>
+        <th>Approx Weight</th>
+        <th>Category</th>
+        <th>Status</th>
+        <th>Tracking Number</th>
+        <th>Receiver</th>
+        <th>Sender</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="parcel : ${parcels}">
+        <td th:text="${parcel.id}"></td>
+        <td th:text="${parcel.destination}"></td>
+        <td th:text="${parcel.estimatedDeliveryDate}"></td>
+        <td th:text="${parcel.approxWeight}"></td>
+        <td th:text="${parcel.categories}"></td>
+        <td th:text="${parcel.parcelStatus}"></td>
+        <td th:text="${parcel.trackingNumber}"></td>
+        <td th:text="${parcel.receiver.receiverEmail}"></td> <!-- Assuming Receiver has a name field -->
+        <td th:text="${parcel.sender.senderName}"></td> <!-- Assuming Sender has a name field -->
+        <td><a th:href="@{'/editParcel/' + ${parcel.id}}">Edit</a></td>
+    </tr>
+    </tbody>
+</table>
+</section>
+</body>
+</html>

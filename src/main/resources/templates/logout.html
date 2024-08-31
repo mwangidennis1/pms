@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html   lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        th:replace="~{base :: html(~{::title}, ~{::section})}"
+>
+<head>
+  <title>Logout</title>
+</head>
+<body>
+<section th:fragment="content">
+<form th:action="@{/logout}" method="post">
+  <button type="submit">Logout</button>
+</form>
+</section>
+</body>
+</html>

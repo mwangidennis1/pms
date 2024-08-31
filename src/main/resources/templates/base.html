@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="html(title, content)">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:replace="${title}">Maya Parcel Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f1f1f1;
+            color: #333;
+        }
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+        .sidebar {
+            width: 240px;
+            background-color: #333333;
+            color: #fff;
+        }
+        .sidebar-header {
+            padding: 20px;
+            text-align: center;
+            background-color: #222222;
+        }
+        .sidebar-header h2 {
+            margin: 0;
+            font-size: 1.2em;
+            color: #ffd700;
+        }
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar ul li a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            padding: 12px 20px;
+            transition: background 0.3s;
+            font-size: 0.9em;
+        }
+        .sidebar ul li a:hover {
+            background-color: #444444;
+        }
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            background-color: #fff;
+        }
+        .content-header {
+            background-color: #ffd700;
+            color: #333;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+        }
+        .content-header h1 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+        .content-section {
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .content-section h2 {
+            color: #333;
+            border-bottom: 2px solid #ffd700;
+            padding-bottom: 10px;
+        }
+        a {
+            color: #0056b3;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>Maya Parcel Inc.</h2>
+        </div>
+        <ul>
+            <li><a th:href="@{/dashboard}">Dashboard</a></li>
+            <li><a th:href="@{/add_new}">Add New</a></li>
+            <li><a th:href="@{/user}">Account</a></li>
+            <li><a th:href="@{/branch_staff}">Branch Staff</a></li>
+            <li><a th:href="@{/allparcels}">Parcels</a></li>
+            <li><a th:href="@{/tracking_parcels}">Tracking Parcel</a></li>
+            <li><a th:href="@{/reports}">Reports</a></li>
+            <li><a th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <div class="content-header">
+            <h1>Maya Parcel Management</h1>
+
+        </div>
+        <div class="content-section">
+            <th:block th:replace="${content}">
+                <!-- Dynamic content will be injected here -->
+            </th:block>
+        </div>
+    </div>
+</div>
+</body>
+</html>

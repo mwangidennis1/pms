@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base :: html(~{::title}, ~{::section})}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<section th:fragment="content">
+<div>
+    <form th:action="@{/reports}" method="post">
+    <label>From :</label>
+    <input type="datetime-local" th:field="*{datedto.from}"  name="from" required>
+    <label> To :</label>
+    <input type="datetime-local" th:field="*{datedto.to}" name="to" required>
+        <button type="submit">Search</button>
+        </form>
+</div>
+</section>
+</body>
+</html>

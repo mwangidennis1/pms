@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Confirm Parcel</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1, h2 {
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin: 5px 0;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        button[value="false"] {
+            background-color: #e74c3c;
+        }
+
+        button[value="false"]:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Confirm Parcel Details</h1>
+    <p>The amount for this parcel is: Ksh <span th:text="${amount}"></span></p>
+
+    <h2>Parcel Details:</h2>
+    <p>Destination: <span th:text="${session.parcel.destination}"></span></p>
+    <p>Estimated Delivery Date: <span th:text="${session.parcel.estimatedDeliveryDate}"></span></p>
+    <p>Approximate Weight: <span th:text="${session.parcel.approxWeight}"></span></p>
+    <p>Categories: <span th:text="${session.parcel.categories}"></span></p>
+
+    <h2>Sender Details:</h2>
+    <p>Name: <span th:text="${session.sender.senderName}"></span></p>
+    <p>Phone: <span th:text="${session.sender.senderPhoneNo}"></span></p>
+    <p>Email: <span th:text="${session.sender.senderEmail}"></span></p>
+
+    <h2>Receiver Details:</h2>
+    <p>Phone: <span th:text="${session.receiver.receiverPhoneNo}"></span></p>
+    <p>Email: <span th:text="${session.receiver.receiverEmail}"></span></p>
+
+    <div class="button-group">
+        <form th:action="@{/confirm-parcel}" method="post" style="display: inline;">
+            <button type="submit" name="accept" value="true">Accept</button>
+        </form>
+        <form th:action="@{/confirm-parcel}" method="post" style="display: inline;">
+            <button type="submit" name="accept" value="false">Decline</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

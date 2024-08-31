@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base :: html(~{::title}, ~{::section})}">
+<head>
+    <title>Employee List</title>
+    <style>
+        .employee-container {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .employee-container h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ffd700;
+        }
+        .employee-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        .employee-table th, .employee-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .employee-table th {
+            background-color: #f8f8f8;
+            font-weight: bold;
+            color: #333;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+        .employee-table td {
+            font-size: 14px;
+        }
+        .employee-table tr:hover {
+            background-color: #f5f5f5;
+        }
+        .employee-table tr:last-child td {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+<section th:fragment="content">
+    <div>
+        <p>To create a new Employee click the button below</p>
+        <button type="button"><a th:href="@{/register}">create</a></button>
+    </div>
+    <div class="employee-container">
+        <h2>Employee List</h2>
+        <table class="employee-table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="employee : ${employees}">
+                <td th:text="${employee.id}"></td>
+                <td th:text="${employee.username}"></td>
+                <td th:text="${employee.email}"></td>
+                <td th:text="${employee.role}"></td>
+                <td><a th:href="@{'/deleteemployee/' + ${employee.id}}">Delete Emp</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+</body>
+</html>
