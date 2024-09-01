@@ -1,6 +1,7 @@
 package org.mwangi.maya.services;
 
 import okhttp3.*;
+import org.mwangi.maya.utility.Fileio;
 import org.mwangi.maya.utility.Notif;
 import org.mwangi.maya.utility.SmsNotif;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,7 +41,7 @@ public class ParcelReceiveSmsNotification implements Notif {
                 if (response.isSuccessful()) {
 
                     String responseBody = response.body().string();
-                    System.out.println("Response: " + responseBody);
+                    Fileio.saveATResponses(responseBody);
                 } else {
                     System.err.println("Request failed: " + response.code());
                 }

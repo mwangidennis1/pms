@@ -1,0 +1,2 @@
+{"SMSMessageData":{"Message":"Sent to 1/1 Total Cost: KES 0.8000 Message parts: 1","Recipients":[{"cost":"KES 0.8000","messageId":"ATXid_11b9482fb92fbef09ec4426a896620ff","number":"+254794658495","status":"Success","statusCode":101}]}}
+{"SMSMessageData":{"Message":"Sent to 1/1 Total Cost: KES 0.8000 Message parts: 1","Recipients":[{"cost":"KES 0.8000","messageId":"ATXid_d43ff248520b3045e62977b89dc4d5cb","number":"+254794658495","status":"Success","statusCode":101}]}}

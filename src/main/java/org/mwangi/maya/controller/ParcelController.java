@@ -12,6 +12,7 @@ import org.mwangi.maya.dto.DateTimeDTO;
 import org.mwangi.maya.dto.ParcelDTO;
 import org.mwangi.maya.entities.*;
 import org.mwangi.maya.exception.ResourceNotFoundException;
+import org.mwangi.maya.services.ATService;
 import org.mwangi.maya.services.ParcelSentGmailNotification;
 import org.mwangi.maya.services.ParcelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,8 @@ import java.util.stream.Collectors;
 public class ParcelController {
     @Autowired
     private ParcelService parcelService;
-
+    @Autowired
+    private ATService atService;
     private ParcelSentGmailNotification parcelSentGmailNotification;
 
     public ParcelController(ParcelService parcelService, ParcelSentGmailNotification parcelSentGmailNotification) {
@@ -116,12 +118,7 @@ public class ParcelController {
         }else {
             parcelService.setType(0);
         }
-       /*try {
-           parcelService.createParcel(parcel, receiver, sender);
-           return "redirect:/allparcels";
-       }catch (IllegalArgumentException e){
-           return "error";
-       }*/
+
         session.setAttribute("parcel", parcel);
         session.setAttribute("receiver", receiver);
         session.setAttribute("sender", sender);
@@ -209,6 +206,11 @@ public class ParcelController {
       public String deleteParci(@PathVariable(name = "id") long id){
         parcelService.deleteParcel(id);
         return "redirect:/allparcels";
+      }
+      @GetMapping("/ATLogs")
+      public String ATLogs(Model model){
+        model.addAttribute("balance",atService.initService());
+        return "at_details";
       }
     @GetMapping("/parcels/pdf")
     public void generatePdfView(HttpServletResponse response) throws IOException, DocumentException {

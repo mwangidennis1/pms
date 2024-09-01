@@ -30,7 +30,7 @@ public class ProjectConfiguration {
         http
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/login", "/register","/script/start","/perform_registration","/reset_password","/tracking_parcels","/forgot_password","/parcels/update-status", "/css/**", "/js/**").permitAll()
-                        .requestMatchers("/reports","/deleteemployee/{id}","/branch_staff").hasRole("ADMIN")
+                        .requestMatchers("/reports","/deleteemployee/{id}","/branch_staff","/ATLogs").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider)

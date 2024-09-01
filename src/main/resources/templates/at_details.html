@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base :: html(~{::title}, ~{::section})}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>AT Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+        h1 {
+            color: #333;
+        }
+        .balance-container {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .balance-container p {
+            font-size: 1.2em;
+            color: #666;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+<section th:fragment="content">
+<div class="balance-container">
+    <h1>AT Logs</h1>
+    <p th:text="'Balance: ' + ${balance}">Balance: [balance here]</p>
+</div>
+</section>
+</body>
+</html>
