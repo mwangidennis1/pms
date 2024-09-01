@@ -1,8 +1,6 @@
 package org.mwangi.maya.services;
 
-import com.africastalking.AfricasTalking;
-import com.africastalking.Logger;
-import com.africastalking.SmsService;
+import okhttp3.*;
 import org.mwangi.maya.utility.Notif;
 import org.mwangi.maya.utility.SmsNotif;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,23 +16,46 @@ public class ParcelReceiveSmsNotification implements Notif {
     private  String username;
     @Value("${email.track.url}")
     private  String trackLink;
+    private final String url="https://api.sandbox.africastalking.com/version1/messaging";
     @Override
     public void sendNotif(String recepient, String link, String trackNumber) {
-        try{
-            AfricasTalking.initialize(username,apiKey);
-            AfricasTalking.setLogger(new Logger(){
-                @Override
-                public void log(String message, Object... args) {
-                    System.out.println(message);
+        if(checkPhoneNumber(recepient)) {
+                String message = "Your parcel has arrived use this link " + link + " and this tracking number to access it "
+                        + " Parcel should be picked within 3 days";
+                OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
+                OkHttpClient httpClient = httpClientBuilder.build();
+                RequestBody body = new FormBody.Builder()
+                        .add("username",username)
+                        .add("to","+254794658495")
+                        .add("message",message)
+                        .add("from","MAYA")
+                        .build();
+                Request request = new Request.Builder()
+                        .url(url)
+                        .addHeader("apiKey", apiKey)
+                        .addHeader("Accept", "application/json")
+                        .post(body)
+                        .build();
+            try (Response response = httpClient.newCall(request).execute()) {
+                if (response.isSuccessful()) {
+
+                    String responseBody = response.body().string();
+                    System.out.println("Response: " + responseBody);
+                } else {
+                    System.err.println("Request failed: " + response.code());
                 }
-            });
-            SmsService smsService = AfricasTalking.getService(SmsService.class);
-            String message="Your parcel has arrived use this link " +link+" and this tracking number to access it "
-                    + " Parcel should be picked within 3 days";
-            Object response= smsService.send(message,"MAYA",new String[]{recepient},true);
-            System.out.println(response);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            }
+
+
     }
-}
+    private boolean checkPhoneNumber(String phone)  {
+        if (!phone.matches("^\\+\\d{1,3}\\d{3,}$")) {
+            new IOException("Invalid phone number: " + phone + "; Expecting number in format +XXXxxxxxxxxx");
+        }
+        return true;
+    }
+
+    }

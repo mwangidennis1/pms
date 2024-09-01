@@ -61,7 +61,7 @@ public class ParcelService {
         }else{
             String phoneNo=receiver.getReceiverPhoneNo();
             String front="+254" + phoneNo.substring(1);
-            System.out.println(front);
+            //System.out.println(front);
             notif.sendNotif(front,trackLink,trackingNumber);
         }
         //parcelSentGmailNotification.sendNotif(receiver.getReceiverEmail(),trackLink,trackingNumber);
