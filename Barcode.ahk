@@ -3,7 +3,7 @@ SetWorkingDir A_ScriptDir  ; Ensures a consistent starting directory.
 
 ^!1::
 {
-SendBarcodeToSystem("nqlGocb")
+SendBarcodeToSystem("1QA7X18")
 }
 
 SendBarcodeToSystem(barcode) {
