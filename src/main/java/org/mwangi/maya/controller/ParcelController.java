@@ -222,12 +222,12 @@ public class ParcelController {
         PdfWriter writer = PdfWriter.getInstance(document, response.getOutputStream());
         document.open();
 
-        // Add logo (replace with your actual logo path)
+        /*Add logo (replace with your actual logo path)
         //Image logo = Image.getInstance("path/to/your/logo.png");
         //logo.scaleToFit(100, 100);
         //logo.setAlignment(Element.ALIGN_LEFT);
         //document.add(logo);
-
+          */
         // Add title
         Font titleFont = new Font(Font.FontFamily.HELVETICA, 24, Font.BOLD, BaseColor.DARK_GRAY);
         Paragraph title = new Paragraph("Maya Reports", titleFont);

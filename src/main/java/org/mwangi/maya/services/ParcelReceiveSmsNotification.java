@@ -21,13 +21,13 @@ public class ParcelReceiveSmsNotification implements Notif {
     @Override
     public void sendNotif(String recepient, String link, String trackNumber) {
         if(checkPhoneNumber(recepient)) {
-                String message = "Your parcel has arrived use this link " + link + " and this tracking number to access it "
+                String message = "Your parcel has been sent use this link " + link + " and this tracking number to access it "
                         + " Parcel should be picked within 3 days";
                 OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
                 OkHttpClient httpClient = httpClientBuilder.build();
                 RequestBody body = new FormBody.Builder()
                         .add("username",username)
-                        .add("to","+254794658495")
+                        .add("to",recepient)
                         .add("message",message)
                         .add("from","MAYA")
                         .build();

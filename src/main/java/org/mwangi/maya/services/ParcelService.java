@@ -61,10 +61,10 @@ public class ParcelService {
         }else{
             String phoneNo=receiver.getReceiverPhoneNo();
             String front="+254" + phoneNo.substring(1);
-            //System.out.println(front);
+
             notif.sendNotif(front,trackLink,trackingNumber);
         }
-        //parcelSentGmailNotification.sendNotif(receiver.getReceiverEmail(),trackLink,trackingNumber);
+
         try {
             updateAutoHotkeyScript(trackingNumber);
         } catch (IOException e) {
@@ -94,7 +94,7 @@ public class ParcelService {
     }
     public void  updateParcelStatus(String tracknumber){
          Parcel parcel=getParcelByTrackNumber(tracknumber);
-       // System.out.println("I have been called\n" + parcel);
+
          parcel.setParcelStatus(ParcelStatus.DELIVERED);
          parcelRepository.save(parcel);
         Notif notif=notificationFactory.getNotificationService(notifMethod);
@@ -106,9 +106,6 @@ public class ParcelService {
          }else {
              notif.sendNotif(parcel.getReceiver().getReceiverEmail(),trackLink,tracknumber);
          }
-        //applicationEventPublisher.publishEvent(new ParcelStatusChangedEvent(this, parcel));
-        //System.out.println("my mutated state\n " +parcel);
-        // parcelReceiveGmailNotification.sendNotif(parcel.getReceiver().getReceiverEmail(),trackLink,tracknumber);
 
     }
     public List<Parcel> reportResults(LocalDateTime from,LocalDateTime to){

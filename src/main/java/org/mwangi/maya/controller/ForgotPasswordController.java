@@ -3,10 +3,9 @@ package org.mwangi.maya.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import org.mwangi.maya.entities.Employee;
 import org.mwangi.maya.services.EmployeeService;
-import org.mwangi.maya.services.GmailNotification;
+import org.mwangi.maya.services.PasswordGmailNotification;
 import org.mwangi.maya.utility.Utility;
 import org.springframework.data.repository.query.Param;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.apache.commons.lang3.RandomStringUtils;
 @Controller
 public class ForgotPasswordController {
-    private GmailNotification gmailNotification;
+    private PasswordGmailNotification gmailNotification;
     private EmployeeService employeeService;
 
-    public ForgotPasswordController(GmailNotification gmailNotification, EmployeeService employeeService) {
+    public ForgotPasswordController(PasswordGmailNotification gmailNotification, EmployeeService employeeService) {
         this.gmailNotification = gmailNotification;
         this.employeeService = employeeService;
     }

@@ -22,7 +22,7 @@ public class ParcelReceiveGmailNotification implements Notif {
         MimeMessage message=javaMailSender.createMimeMessage();
         MimeMessageHelper helper=new MimeMessageHelper(message);
         try {
-            helper.setFrom("denmwangi@usiu.ac.ke","MAYA");
+            helper.setFrom("dummyemail@email","MAYA");
             helper.setTo(recepient);
             String subject="PARCEL DELIVERY USO";
             String content = "<p>Hello,</p>"

@@ -21,10 +21,6 @@ public class ProjectConfiguration {
         this.authenticationProvider = authenticationProvider;
     }
 
-    /*@Autowired
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(authenticationProvider);
-    }*/
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http

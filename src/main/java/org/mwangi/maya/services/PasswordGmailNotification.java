@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
 @Service
-public class GmailNotification implements EmailNotification {
+public class PasswordGmailNotification implements EmailNotification {
    private JavaMailSender javaMailSender;
 
-    public GmailNotification(JavaMailSender javaMailSender) {
+    public PasswordGmailNotification(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
     }
 
