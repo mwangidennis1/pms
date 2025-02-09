@@ -4,7 +4,7 @@ SetWorkingDir A_ScriptDir  ; Ensures a consistent starting directory.
 
 ^!1::
 {
-SendBarcodeToSystem("L1qaoG1")
+SendBarcodeToSystem("h3xgskF")
 }
 
 SendBarcodeToSystem(barcode) {
