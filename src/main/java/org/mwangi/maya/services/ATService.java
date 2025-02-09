@@ -37,11 +37,8 @@ public class ATService {
         System.out.println(request);
         try (Response response = httpClient.newCall(request).execute()) {
             if (response.isSuccessful()) {
-
                 String responseBody = response.body().string();
                 responseBodyout = responseBody;
-
-                //System.out.println("Response: " + responseBody);
             } else {
                 System.err.println("Request failed: " + response.code());
             }

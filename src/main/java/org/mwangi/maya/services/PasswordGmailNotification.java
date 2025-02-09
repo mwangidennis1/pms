@@ -21,7 +21,7 @@ public class PasswordGmailNotification implements EmailNotification {
         MimeMessage message=javaMailSender.createMimeMessage();
         MimeMessageHelper helper=new MimeMessageHelper(message);
         try {
-            helper.setFrom("denmwangi@usiu.ac.ke","MAYA");
+            helper.setFrom("dummy@email","MAYA");
             helper.setTo(recepientEmail);
             String subject="Here`s the link to reset your password";
             String content = "<p>Hello,</p>"
@@ -34,9 +34,7 @@ public class PasswordGmailNotification implements EmailNotification {
             helper.setSubject(subject);
             helper.setText(content,true);
             javaMailSender.send(message);
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        } catch (UnsupportedEncodingException e) {
+        } catch (MessagingException | UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
 

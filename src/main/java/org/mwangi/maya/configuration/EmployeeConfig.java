@@ -31,9 +31,7 @@ public class EmployeeConfig {
             @Override
             public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
                 Employee employee=employeeRepository.findEmployeeByEmail(username);
-                System.out.println(employee);
-                if(employee ==null){
-                    System.out.println("why is this exception to being raised");
+                if(employee == null){
                     throw new UsernameNotFoundException("could not find user");
                 }
                 return new EmployeeSecurity(employee);

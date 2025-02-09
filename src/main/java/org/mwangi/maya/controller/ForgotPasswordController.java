@@ -28,9 +28,7 @@ public class ForgotPasswordController {
     @PostMapping("/forgot_password")
     public String processPassi(HttpServletRequest request, Model model){
         String email=request.getParameter("email");
-        //System.out.println(email);
         String token=RandomStringUtils.randomAlphanumeric(30);
-        //System.out.println(token);
         employeeService.updateResetPasswordToken(token,email);
         String resetPasswordLink= Utility.getSiteURL(request) + "/reset_password?token=" + token;
         gmailNotification.sendEmail(email,resetPasswordLink);
@@ -41,7 +39,6 @@ public class ForgotPasswordController {
     @GetMapping("/reset_password")
     public  String  resetPassi(@Param(value = "token") String token,Model model){
         Employee employee=employeeService.getByResetPasswordToken(token);
-        //System.out.println(employee);
         model.addAttribute("token",token);
         if(employee ==null){
             model.addAttribute("message","Invalid Token");
@@ -54,9 +51,6 @@ public class ForgotPasswordController {
         String token = request.getParameter("token");
         String password=request.getParameter("password");
         Employee employee=employeeService.getByResetPasswordToken(token);
-        System.out.println(token);
-        System.out.println(password);
-        System.out.println(employee);
         model.addAttribute("title","Reset your password");
         if(employee == null){
             model.addAttribute("message","Invalid Token");

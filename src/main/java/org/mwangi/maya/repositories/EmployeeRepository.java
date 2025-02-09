@@ -11,7 +11,7 @@ public interface EmployeeRepository extends JpaRepository<Employee,Long> {
 SELECT e FROM Employee e WHERE lower(e.username)=lower(:name) 
 """
     )
-    public Employee getEmployeeIgoreCase(@Param("name") String name);
+    Employee getEmployeeIgoreCase(@Param("name") String name);
     @Query("""
  SELECT  e FROM  Employee e WHERE  lower(e.username)=lower( ?1)
 """)

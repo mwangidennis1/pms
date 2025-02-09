@@ -3,7 +3,6 @@ package org.mwangi.maya.services;
 import okhttp3.*;
 import org.mwangi.maya.utility.Fileio;
 import org.mwangi.maya.utility.Notif;
-import org.mwangi.maya.utility.SmsNotif;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +16,7 @@ public class ParcelReceiveSmsNotification implements Notif {
     private  String username;
     @Value("${email.track.url}")
     private  String trackLink;
-    private final String url="https://api.sandbox.africastalking.com/version1/messaging";
+
     @Override
     public void sendNotif(String recepient, String link, String trackNumber) {
         if(checkPhoneNumber(recepient)) {
@@ -31,7 +30,8 @@ public class ParcelReceiveSmsNotification implements Notif {
                         .add("message",message)
                         .add("from","MAYA")
                         .build();
-                Request request = new Request.Builder()
+            String url = "https://api.sandbox.africastalking.com/version1/messaging";
+            Request request = new Request.Builder()
                         .url(url)
                         .addHeader("apiKey", apiKey)
                         .addHeader("Accept", "application/json")

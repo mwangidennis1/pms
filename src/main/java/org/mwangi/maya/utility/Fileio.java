@@ -10,8 +10,6 @@ public class Fileio {
    try(FileOutputStream out=new FileOutputStream("ATResponses.txt",true)){
           out.write(response.getBytes());
           out.write("\n".getBytes());
-   } catch (FileNotFoundException e) {
-       throw new RuntimeException(e);
    } catch (IOException e) {
        throw new RuntimeException(e);
    }

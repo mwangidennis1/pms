@@ -19,7 +19,7 @@ public class BarcodeController {
     @PostMapping("/script/start")
     public ResponseEntity<?> startScript() {
         try {
-            String autoHotKeypath="C:\\Program Files\\AutoHotkey\\v2\\AutoHotkey.exe";
+            String autoHotKeypath="";//put path to autohokey installation
             Runtime.getRuntime().exec( autoHotKeypath+ " " + scriptPath);
             return ResponseEntity.ok("Script started successfully");
         } catch (IOException e) {
@@ -30,9 +30,7 @@ public class BarcodeController {
     @ResponseBody
     public void updateParcelStatus(@RequestBody Map<String, String> payload) {
         String barcode = payload.get("barcode");
-        //System.out.println(barcode);
         try {
-            //System.out.println("Wamenicall");
             parcelService.updateParcelStatus(barcode);
 
         } catch (Exception e) {

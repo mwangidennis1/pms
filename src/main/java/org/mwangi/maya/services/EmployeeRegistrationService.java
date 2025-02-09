@@ -21,8 +21,6 @@ public class EmployeeRegistrationService {
                 .email(employee.getEmail())
                 .role(employee.getRole())
                 .build();
-
-        // Check if username already exists
         if (employeeRepository.findEmployeeByEmail(e.getUsername()) != null) {
             throw new RuntimeException("Username already exists");
         }

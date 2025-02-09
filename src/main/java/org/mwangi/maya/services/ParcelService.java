@@ -24,18 +24,18 @@ import static java.math.BigDecimal.valueOf;
 
 @Service
 public class ParcelService {
-    private String[] notifType={"email","sms"};
+    private final String[] notifType={"email","sms"};
     private String notifMethod;
     @Value("${email.track.url}")
     private  String trackLink;
-    private ApplicationEventPublisher applicationEventPublisher;
-    private ParcelRepository parcelRepository;
-    private ReceiverRepository receiverRepository;
-    private SenderRepository senderRepository;
+    private final ApplicationEventPublisher applicationEventPublisher;
+    private final ParcelRepository parcelRepository;
+    private final ReceiverRepository receiverRepository;
+    private final SenderRepository senderRepository;
 
-    private  ParcelSentGmailNotification parcelSentGmailNotification;
+    private final ParcelSentGmailNotification parcelSentGmailNotification;
 
-    private   NotificationFactory notificationFactory;
+    private final NotificationFactory notificationFactory;
 
     public ParcelService(ApplicationEventPublisher applicationEventPublisher, ParcelRepository parcelRepository, ReceiverRepository receiverRepository, SenderRepository senderRepository, ParcelSentGmailNotification parcelSentGmailNotification, NotificationFactory notificationFactory) {
         this.applicationEventPublisher = applicationEventPublisher;
@@ -77,7 +77,6 @@ public class ParcelService {
     private void updateAutoHotkeyScript(String barcode) throws IOException {
         String pathToScript= "./Barcode.ahk";
         List<String> lines = Files.readAllLines(Paths.get(pathToScript));
-
         for (int i = 0; i < lines.size(); i++) {
             if (lines.get(i).contains("SendBarcodeToSystem(")) {
                 lines.set(i, "SendBarcodeToSystem(\"" + barcode + "\")");
@@ -88,20 +87,16 @@ public class ParcelService {
         Files.write(Paths.get(pathToScript), lines);
     }
     public Parcel getParcelByTrackNumber(String number){
-
         return  parcelRepository.findParcelByTrackingNumber(number);
-
     }
     public void  updateParcelStatus(String tracknumber){
          Parcel parcel=getParcelByTrackNumber(tracknumber);
-
          parcel.setParcelStatus(ParcelStatus.DELIVERED);
          parcelRepository.save(parcel);
         Notif notif=notificationFactory.getNotificationService(notifMethod);
          if(parcel.getReceiver().getReceiverEmail().isEmpty()){
              String phoneNo=parcel.getReceiver().getReceiverPhoneNo();
              String front="+254" + phoneNo.substring(1);
-             System.out.println(front);
              notif.sendNotif(front,trackLink,tracknumber);
          }else {
              notif.sendNotif(parcel.getReceiver().getReceiverEmail(),trackLink,tracknumber);

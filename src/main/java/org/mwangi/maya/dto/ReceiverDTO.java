@@ -10,7 +10,5 @@ import lombok.Data;
 public class ReceiverDTO {
     private String receiverPhoneNo;
     private  String receiverEmail;
-    public  ReceiverDTO(){
 
-    }
 }

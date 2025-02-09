@@ -57,12 +57,9 @@ public class EmployeeController {
 
    @GetMapping("/user")
     public String getUserInfo(Model model){
-        //Employee employee=employeeService.getEmp();
        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-       String username = authentication.getName();
-       Employee employee=employeeService.getOneEmployee(username);
+       Employee employee=employeeService.getOneEmployee(authentication.getName());
        model.addAttribute("employee", employee);
-
         return "user";
    }
 
@@ -84,8 +81,6 @@ public class EmployeeController {
 
         if (optionalEmployee.isPresent()) {
             Employee employee = optionalEmployee.get();
-            System.out.println(employee);
-
             mav.addObject("employee", employee);
         } else {
             mav.setViewName("error"); // or any appropriate error view

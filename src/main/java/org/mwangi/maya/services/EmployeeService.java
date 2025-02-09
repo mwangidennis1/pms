@@ -14,7 +14,7 @@ import java.util.Optional;
 public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     public EmployeeService(EmployeeRepository employeeRepository, PasswordEncoder passwordEncoder) {
         this.employeeRepository = employeeRepository;
@@ -33,7 +33,6 @@ public class EmployeeService {
             employee.setResetPasswordToken(token);
             employeeRepository.save(employee);
         }else {
-            //custom exception
             throw  new UsernameNotFoundException("could find the nigga");
         }
     }

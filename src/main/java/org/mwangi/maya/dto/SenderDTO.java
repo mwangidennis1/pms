@@ -11,7 +11,5 @@ public class SenderDTO {
     private String senderName;
     private String senderPhoneNo;
     private  String senderEmail;
-    public SenderDTO(){
 
-    }
 }

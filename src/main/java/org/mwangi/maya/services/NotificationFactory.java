@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class NotificationFactory {
-    private  ParcelReceiveGmailNotification parcelReceiveGmailNotification;
-    private  ParcelReceiveSmsNotification parcelReceiveSmsNotification;
+    private  final ParcelReceiveGmailNotification parcelReceiveGmailNotification;
+    private  final ParcelReceiveSmsNotification parcelReceiveSmsNotification;
 
     public NotificationFactory(ParcelReceiveGmailNotification parcelReceiveGmailNotification, ParcelReceiveSmsNotification parcelReceiveSmsNotification) {
         this.parcelReceiveGmailNotification = parcelReceiveGmailNotification;

@@ -68,7 +68,6 @@ public class ParcelController {
     @GetMapping("/in_transit")
     public String getInTransit(Model model){
         List<Parcel> allParcels=parcelService.getParcels();
-
         List<Parcel> inTransitParcels = allParcels.stream()
                 .filter(parcel -> parcel.getParcelStatus() == ParcelStatus.IN_TRANSIT)
                 .collect(Collectors.toList());
@@ -104,7 +103,6 @@ public class ParcelController {
         sender.setSenderName(parcelDTO.getSender().getSenderName());
         sender.setSenderPhoneNo(parcelDTO.getSender().getSenderPhoneNo());
         sender.setSenderEmail(parcelDTO.getSender().getSenderEmail());
-        //String trackingNumber= RandomStringUtils.randomAlphanumeric(7);
         Parcel parcel =new Parcel();
         parcel.setDestination(parcelDTO.getDestination());
         parcel.setEstimatedDeliveryDate(parcelDTO.getEstimatedDeliveryDate());
@@ -134,10 +132,7 @@ public class ParcelController {
                 Parcel parcel = (Parcel) session.getAttribute("parcel");
                 Receiver receiver = (Receiver) session.getAttribute("receiver");
                 Sender sender = (Sender) session.getAttribute("sender");
-
                 parcelService.createParcel(parcel, receiver, sender);
-
-                // Clear session attributes
                 session.removeAttribute("parcel");
                 session.removeAttribute("receiver");
                 session.removeAttribute("sender");
@@ -147,11 +142,10 @@ public class ParcelController {
                 return "error";
             }
         } else {
-            // Clear session attributes
             session.removeAttribute("parcel");
             session.removeAttribute("receiver");
             session.removeAttribute("sender");
-            return "redirect:/dashboard"; // or wherever you want to redirect if not accepted
+            return "redirect:/dashboard";
         }
     }
 
@@ -217,18 +211,9 @@ public class ParcelController {
         List<Parcel> parcels = parcelService.getParcels();
         response.setContentType("application/pdf");
         response.setHeader("Content-Disposition", "inline; filename=maya_reports.pdf");
-
         Document document = new Document(PageSize.A4);
         PdfWriter writer = PdfWriter.getInstance(document, response.getOutputStream());
         document.open();
-
-        /*Add logo (replace with your actual logo path)
-        //Image logo = Image.getInstance("path/to/your/logo.png");
-        //logo.scaleToFit(100, 100);
-        //logo.setAlignment(Element.ALIGN_LEFT);
-        //document.add(logo);
-          */
-        // Add title
         Font titleFont = new Font(Font.FontFamily.HELVETICA, 24, Font.BOLD, BaseColor.DARK_GRAY);
         Paragraph title = new Paragraph("Maya Reports", titleFont);
         title.setAlignment(Element.ALIGN_CENTER);
@@ -236,17 +221,16 @@ public class ParcelController {
         title.setSpacingAfter(20);
         document.add(title);
 
-        // Create table
+
         PdfPTable table = new PdfPTable(5);
         table.setWidthPercentage(100);
         table.setSpacingBefore(10f);
         table.setSpacingAfter(10f);
 
-        // Table header style
         Font headerFont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD, BaseColor.WHITE);
         BaseColor headerBackground = new BaseColor(0, 102, 204); // Dark blue
 
-        // Add table headers
+
         String[] headers = {"ID", "Destination", "Date of Delivery", "Weight", "Status"};
         for (String header : headers) {
             PdfPCell cell = new PdfPCell(new Phrase(header, headerFont));
@@ -257,12 +241,12 @@ public class ParcelController {
             table.addCell(cell);
         }
 
-        // Alternating row colors
+
         BaseColor lightBlue = new BaseColor(237, 244, 252);
         BaseColor white = BaseColor.WHITE;
         Font contentFont = new Font(Font.FontFamily.HELVETICA, 10);
 
-        // Add parcel data to table
+
         boolean alternateColor = false;
         for (Parcel parcel : parcels) {
             BaseColor rowColor = alternateColor ? lightBlue : white;
@@ -296,7 +280,6 @@ public class ParcelController {
     private BigDecimal calculateMoney(Parcel parcel){
         double baseprice= 200;
         Categories c=parcel.getCategories();
-        double w=Double.valueOf(parcel.getApproxWeight());
         BigDecimal price= BigDecimal.valueOf(0.0);
         switch (c){
             case FRAGILE -> price= BigDecimal.valueOf(baseprice + 200);

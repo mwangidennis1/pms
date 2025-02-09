@@ -11,7 +11,7 @@ import java.io.UnsupportedEncodingException;
 
 @Service
 public class ParcelReceiveGmailNotification implements Notif {
-    private JavaMailSender javaMailSender;
+    private final JavaMailSender javaMailSender;
 
     public ParcelReceiveGmailNotification( JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
@@ -36,9 +36,7 @@ public class ParcelReceiveGmailNotification implements Notif {
             helper.setSubject(subject);
             helper.setText(content,true);
             javaMailSender.send(message);
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        } catch (UnsupportedEncodingException e) {
+        } catch (MessagingException | UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
     }
