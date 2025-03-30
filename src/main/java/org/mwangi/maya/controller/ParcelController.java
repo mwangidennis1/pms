@@ -260,7 +260,7 @@ public class ParcelController {
 
         document.add(table);
 
-        // Add footer
+
         Phrase footer = new Phrase("Page " + writer.getPageNumber(), new Font(Font.FontFamily.HELVETICA, 8));
         ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER, footer,
                 (document.right() - document.left()) / 2 + document.leftMargin(),

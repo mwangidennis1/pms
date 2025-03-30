@@ -83,7 +83,7 @@ public class EmployeeController {
             Employee employee = optionalEmployee.get();
             mav.addObject("employee", employee);
         } else {
-            mav.setViewName("error"); // or any appropriate error view
+            mav.setViewName("error");
             mav.addObject("errorMessage", "Employee not found");
         }
 
